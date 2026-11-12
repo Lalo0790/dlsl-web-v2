@@ -270,3 +270,4 @@ h1 em{color:var(--lilac);padding-right:.04em}
 #waPanel{z-index:95}
 body.chat-lock .hd,body.chat-lock .wa{visibility:hidden}
 #waFab{transition:transform .5s var(--ease),opacity .4s}#waFab.hid{transform:scale(.4);opacity:0;pointer-events:none}#waTip.hid{opacity:0!important;pointer-events:none!important}
+.shot .ph img,.shot .interp-bg img{transform:none!important;transition:none!important}.shot .rv{transition:none!important}
