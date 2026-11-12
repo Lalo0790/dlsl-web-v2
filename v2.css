@@ -142,7 +142,7 @@ h1 em{color:var(--lilac);padding-right:.04em}
 .team{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);margin-top:clamp(56px,7vw,100px)}
 .pc{border-top:1px solid var(--ink);padding-top:34px}
 .pc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
-.mono{width:92px;height:92px}.mono path{fill:var(--plum2)}.mono text{font:400 36px var(--serif);fill:var(--paper);letter-spacing:.5px}
+.mono{position:relative;display:grid;place-items:center;flex:0 0 auto;width:92px;height:92px}.mono svg{position:absolute;inset:0;width:100%;height:100%}.mono path{fill:var(--plum2)}.mono b{position:relative;top:-2%;font:400 34px/1 var(--serif);color:var(--paper);letter-spacing:.5px}
 .yrs{text-align:right}.yrs b{display:block;font:400 clamp(3.6rem,6vw,5.4rem)/.85 var(--serif);letter-spacing:-.04em}.yrs span{font-size:.8rem;color:var(--mu);letter-spacing:.02em}
 .pc h3{font-size:clamp(2.2rem,3.4vw,3.2rem)}.pc .role{font:500 .72rem var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--plum2);margin:12px 0 18px}.pc p:not(.role){color:var(--mu);font-size:.98rem;max-width:36em}
 .pull{margin:clamp(80px,10vw,140px) 0 0;padding-left:clamp(0px,8vw,160px);position:relative}
@@ -210,8 +210,8 @@ h1 em{color:var(--lilac);padding-right:.04em}
 .wa{position:fixed;right:22px;bottom:22px;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;z-index:60;background:#25D366;box-shadow:0 10px 28px rgba(0,0,0,.28)}
 .wa svg{width:30px;height:30px;fill:#fff}
 /* reveal */
-.js .rv{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
-.js .rv.in{opacity:1;transform:none}
+.rvok .rv{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
+.rvok .rv.in{opacity:1;transform:none}
 /* responsive */
 @media (max-width:1100px){.nv{display:none}.mb{display:inline-flex}.hd-r{margin-left:auto}}
 @media (max-width:900px){
@@ -243,7 +243,7 @@ h1 em{color:var(--lilac);padding-right:.04em}
  .stats dt{font-size:clamp(3.6rem,19vw,5rem)}
  .row{grid-template-columns:44px 1fr;gap:10px;padding:24px 0 26px}
  .sl li{padding:14px 18px 14px 0;margin-right:18px}
- .pc-top{margin-bottom:24px}.mono{width:72px;height:72px}
+ .pc-top{margin-bottom:24px}.mono{width:72px;height:72px}.mono b{font-size:27px}
  .qf{grid-template-columns:1fr;padding:24px 20px}
  .phone{height:640px;border-radius:46px}.phone .dlc{border-radius:36px}
  .ct{grid-template-columns:1fr}.ct div,.ct div+div{padding:22px 0;border-left:0;border-top:1px solid var(--lined)}.ct div:first-child{border-top:0}
@@ -252,7 +252,7 @@ h1 em{color:var(--lilac);padding-right:.04em}
 }
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
- .js .rv{opacity:1;transform:none}.manif.js .wd{color:var(--ink)}.ph img{transform:none}.mq-t{animation:none}.wave{stroke-dashoffset:0}
+ .rv{opacity:1!important;transform:none!important}.manif.js .wd{color:var(--ink)}.ph img{transform:none}.mq-t{animation:none}.wave{stroke-dashoffset:0}
 }
 
 /* panel: no shadow leak when closed */
@@ -271,3 +271,18 @@ h1 em{color:var(--lilac);padding-right:.04em}
 body.chat-lock .hd,body.chat-lock .wa{visibility:hidden}
 #waFab{transition:transform .5s var(--ease),opacity .4s}#waFab.hid{transform:scale(.4);opacity:0;pointer-events:none}#waTip.hid{opacity:0!important;pointer-events:none!important}
 .shot .ph img,.shot .interp-bg img{transform:none!important;transition:none!important}.shot .rv{transition:none!important}
+
+/* fix2: móvil / pantallas táctiles (iOS Safari) — nada fijado ni dependiente del scroll; todo el texto visible siempre */
+@supports not (overflow:clip){body{overflow-x:hidden}}
+.lite .rv,.lite .rv.in{opacity:1!important;transform:none!important;transition:none!important}
+.lite .manif .wd{color:var(--ink)!important}.lite .manif .wd.hl{color:var(--plum2)!important}
+.lite .sl li{opacity:1!important;transform:none!important}
+.lite .chap-img,.lite .phone-wrap{position:relative;top:0}
+.lite .stats dt b{min-width:1ch}
+@media (max-width:680px){
+ .rv,.rv.in{opacity:1!important;transform:none!important}
+ .manif .wd{color:var(--ink)!important}.manif .wd.hl{color:var(--plum2)!important}
+ .sl li{opacity:1!important;transform:none!important}
+ .sec,.manif,.stats,.team,.mvv,.pull{height:auto;max-height:none}
+ .manif{max-width:100%;overflow-wrap:break-word}
+}
